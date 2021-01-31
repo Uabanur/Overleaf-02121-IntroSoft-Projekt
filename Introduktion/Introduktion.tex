@@ -1,0 +1,16 @@
+\section{Introduktion}
+
+% Magnus
+% Into, der svarer til deres intro omskrevet
+I denne rapport dokumenterer vi designet og implementeringen af vores computerspil baseret på det klassiske brætspil dam. Der er forskellige regelsæt for dam, så vi tog udgangspunkt i reglerne fra Wikipedia\footnote{Wikipedia: \url{https://da.wikipedia.org/wiki/Dam_(br\%C3\%A6tspil)}} og Dansk Dam Forening\footnote{Dansk Dam:  \url{http://www.danskdam.dk/}}. De fleste implementerede regler er aktiverbare gennem en menu i spillet.\\
+
+Vi har to endelige versioner af spillet: \\
+\textbf{\textsc{SimpDam}:} En simpel version af dam med kun én brik til hver spiller og få regler. Brættets størrelse er skalérbart.\\
+
+\textbf{\textsc{AvaDam}:} Et mere avanceret damspil med aktivérbare regler, et skalérbart brætstørrelse, animationer og features som highlights, comboer, spil mod computer og save/load.\\
+
+\textbf{Struktur af rapport:} Af hensyn til læseren er rapporten struktureret, så design og implementering af \textsc{SimpDam} og \textsc{AvaDam} gennemgås separat. \textsc{AvaDam} bygger dog videre på \textsc{SimpDam}, så hvert kapitel indledes med et fælles afsnit. Vi har forsøgt at anvende model-view-control designmønstret under projektforløbet; dette ses også i rapportens opbygning. \\
+
+%% MIKKEL %%
+% Hvem er spillets målgruppe?
+\textbf{Spillets målgruppe:} Vores dam spil er sat op til at være intuitivt at kontrollere og reglerne lette at tyde. Dette er gjort, så det henvender sig bedre til den forholdsvis nye dam-spiller, der allerede kender de basale regler. Spilleren har ikke nødvendigvis helt overblik over hvordan alle reglerne hænger samme, og der er derfor skabt en intuitiv brugergrænseflade der fortællere spilleren, på en simpel måde, hvilke mulige træk en given brik har. Vores spil henvender sig også til spilleren der ikke altid har nogen at spille sammen med, og har derfor implementeret en AI. Denne er lavet til ikke at være så udfordrende, da spillets målgruppe ikke er mester til dam.

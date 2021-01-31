@@ -1,0 +1,19 @@
+\subsection{\textsc{SimpDam}}\label{sec:designSimpDam}
+
+%   RR
+%    \item Hvordan må brikker flytte?
+
+\textbf{Flytning af brikker:} 
+I \textsc{SimpDam} skal en brik kun være i stand til at rykke diagonalt, og flytte ét felt af gangen. Hvis brikken kan dræbe skal den lande på feltet direkte efter fjenden og fjenden fjernes. En brik kan flytte som en kronet brik, både op og ned af brættet (stadig diagonalt). 
+\\
+
+%   RR
+%    \item Hvordan ved jeg, hvilke legale træk en brik har?
+\textbf{Visuelle indikationer:} 
+\textsc{SimpDam} har ingen visuelle indikationer om legale træk. Brugeren flytter sin brik; hvis det går godt får brikken den nye position, hvis det går dårligt får brikken den gamle position. Spillet tager udgangspunkt i at spilleren kender til legale træk.
+\\
+
+%   RR
+%    \item Hvordan ændrer jeg brætstørrelse? (terminal)
+\textbf{Ændring af brætstørrelsen:} 
+Hvis spillet køres ved at køre \texttt{.jar}-filen direkte vil man få standardstørrelsen på 8x8 felter. Hvis man vælger at køre filen gennem terminalen via \texttt{"java -jar SimpDam.jar"} vil man blive spurgt om at indtaste et tal mellem 3 og 100 hvor man derigennem vælger størrelsen af brættet. I tilfældet af illegalt input vil man få en fejlbesked og spillet startes med standardstørrelsen. 

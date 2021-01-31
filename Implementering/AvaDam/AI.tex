@@ -1,0 +1,16 @@
+\subsubsection{AI}
+
+Vi har implementeret en kunstig intelligens som modstander. AI'en aktiveres gennem menuen. \\
+
+% Magnus
+% Hvordan animeres flytning af brik? (adv, begge?)
+\textbf{Animation af flytning af brik:} Når AI foretager et træk, er animationen vha. \texttt{JavaFX}'s \texttt{TranslateTransitions} i \texttt{AI}. Først oprettes et objekt af typen \texttt{TranslateTransition}. Derefter tilknyttes den en shape, der skal translateres (flyttes). Start- og slutkoordinaterne på skærmen markeres i view koordinater, relativt til den nuværende position. Endeligt sættes den tidslige varighed af flytningen, og bevægelsen sættes igang. \\
+
+%   RR
+%    \item Hvordan animeres AI flytning af comboer?
+\textbf{Comboer:} 
+Eftersom AI'en simulerer en bruger, har den samme muligheder og indstillinger som en bruger. Hvis indstillingen \texttt{"Combos must be completed"} er sat til, vil AI'en også udføre comboerne. Animationen for denne handling er dog ikke helt optimal. De dræbte brikker animeres væk, men animationen går direkte fra startposition til slutposition. \\
+
+%   RR
+%    \item Hvor mange ressourcer bruger AI?
+\textbf{AI's brug af ressourcer:} Den implementerede AI finder en tilfældig brik, der kan flytte, og flytter denne brik til et tilfældigt legalt felt. Hvis den kan dræbe, foretager den et drab. Med denne implementering bruger AI'en samme regnekraft, som hvis brugeren skulle foretage et træk. Det gør, at der ikke er nogen bemærkelsesværdig forsinkelse i spillet, der spilles mod AI.

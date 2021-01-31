@@ -1,0 +1,39 @@
+\subsection{\textsc{AvaDam}}\label{sec:evaAva}
+
+%   RR
+%   \item Debugging: Hvor sikkert er spillet? Hvilke sanisations har I på inputs?
+\textbf{Program sikkerhed:} 
+Når det kommer til sanitering af input, er programmet simpelt. Der er få bruger inputs; indstillinger sættes gennem checkboxes. Brætstørrelsen vælges via en slider; det gør sanitering unødvendig. Ved upload at billeder har vi tilføjet et filter, der kun gør det muligt at vælge billedtyper accepteret af \texttt{JavaFX}'s \texttt{ImagePattern}. Ved load og save køres default filstier, og der kan ikke loades ugyldige save filer. \\
+
+%   RR
+%    \item Hvordan endte I med den program struktur, I har? (historie om highlights)
+\textbf{Programstruktur:} 
+Strukturen af programmet er blevet ændret i løbet af projektet. En af de største og mest markante ændringer var, da vi gik fra at \textit{verificere} et træk til at \textit{forudsige} legale træk. Da vi indførte highlighting til \texttt{Control}, blev implementeringen af combo simplificeret.  \\
+
+\textit{Før:} Først finder vi legale slutfelter (tjek 1). De blev highligted. Derefter slap vi en brik på et felt, og tjekkede derefter, om det var legalt at slippe brikken her, på samme måde som i \textsc{SimpDam} (tjek 2).\\
+
+\textit{Nu:} Først finder vi legale slutfelter. Så slipper vi en brik. Hvis slutfeltet er highlighted, er feltet en legal destination, så brikken må selvfølgelig slippes her. Det kræver kun ét tjek!\\
+
+% Roar
+\textbf{AI:} Der var foretaget to forskellige indfaldsvinkler til vores AI. Den første og simpleste var en tilfældig AI. Denne fandt en tilfældig brik der kunne flytte, og flyttede den et tilfældigt legalt sted hen. \\
+
+Vi prøvede også med en AI der ikke tog et tilfældigt legalt træk, men som gav alle felter en værdi.
+Værdien var et udtryk for, hvor taktisk feltet var at lande på. Da en optimal strategi umiddelbart ikke kan generaliseres, blev vægtningen af omgivelserne skabt ved en evolutionær algoritme, der bruge princippet bag q-learning. \\
+
+Selvom vægtningerne blev indstillet automatisk, skulle man stadig forudbestemme hvilke parametre der blev brugt på hvilke felter i beregningerne, hvilket gjorde implementeringen til en større udfordring, end hvad der var tid til. Den brugte AI er dermed den første, selvom det var spændende at prøve med andre tilgange.  \\
+
+%   RR
+%    \item Hvad ville I implementere/debugge/forfine, hvis I havde mere tid? 
+\textbf{Mulige implementeringer/ændringer:} 
+Nogle af de features vi gerne ville tilføje til / ændre i programmet, men ikke nåede pga. tid er:
+
+\begin{enumerate}
+\item Bedre animation af AI combo.\footnote{ En mere optimal måde at gøre det på, ville være at animere flytningen af comboen selv. Dette ville umiddelbart kunne indføres uden større besvær. En eventuel implementering ville være at bruge \texttt{PathTransition} og positionerne i \texttt{comboPositions} fra \texttt{Control.}}
+\item Uafhængighed i model-view-control designmønstret.
+\item Musik og lyde.
+\item Anden AI.
+\item Custom bræt (huller og piedestaler)
+\item Bonus effekter.
+\item Power-ups.
+\item Hexagonale felter.
+\end{enumerate}

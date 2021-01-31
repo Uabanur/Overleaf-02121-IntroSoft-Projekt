@@ -1,0 +1,20 @@
+\subsubsection{View}
+%% MIKKEL %%
+% Hvad sker der når spillet startes
+\textbf{Setup af spillet:} 
+\texttt{View} klassen indeholder \texttt{main} metoden som iværksætter programmet, så programmet starter fra \texttt{View}. I \texttt{View} bliver metoden start kørt, der sætter en \texttt{Stage} op. Der skabes et \texttt{Layout root} i form af et \texttt{BorderPane}, og en \texttt{Scene}. \texttt{DamModel} instantieres, og tilføjes til \texttt{root}. Størrelsen af \texttt{stage} sættes efter \texttt{root}, og \texttt{stage} vises. Højden og bredden af \texttt{root} sættes ud fra højden af computerens skærm, så den automatisk tilpasses enhver computer. Højden og bredden kan sættes ud fra den samme parameter, da brættet er kvadratisk.\\ 
+
+%% MIKKEL %%
+% Hvordan håndteres user input?
+\textbf{User input:} I \textsc{SimpDam}  håndteres bruger input på to forskellige måder. Først sætter brugeren et tal som parameter når spillet eksekveres gennem kommandoprompten. Hvis dette tal opfylder $n \in \{3, .., 100\}$, bliver det brugt til at sætte antallet af felter. \texttt{tileAmount} er antallet af felter der er i hver dimension af brættet. \texttt{tileAmount} bliver sendt videre til modellen. Størrelsen af felterne (\texttt{tileSize}) sættes ud fra \texttt{tileAmount} og bredden af scenen. 
+Derefter opsættes GUI'en, hvorefter brugeren interagerer med spillet gennem denne GUI. Her kan man trække i pieces med musen, hvilket bliver håndteret med event listeners. Når en brik bliver flyttet, køres metoden \texttt{dragThisPiece} i klassen  \texttt{TopLevelControl}. Ved brug af \texttt{dragThisPiece} sættes brikkens position til musens position, såfremt musen er indenfor brættet. I x-retningen kontrolleres dette ved følgende stykke kode:
+
+\begin{lstlisting}
+if (mouse.getSceneX() > piece.getRadiusX()
+	&& mouse.getSceneX() < View.tileAmount * tileSize - piece.getRadiusX()) {
+	    piece.setCenterX(mouse.getSceneX());
+}
+\end{lstlisting}
+
+I y-retningen sker det på en tilsvarende måde. \\
+Når man slipper en brik, køres metoden \texttt{finishThisPiece} i \texttt{TopLevelControl}, der kører metoden \texttt{isLegalMove} i \texttt{Control}. \texttt{isLegalMove} checker, om brikken er sluppet over et legalt felt, og returnerer en boolean. Hvis det var et legalt træk, bliver det efterladte brik tildelt denne nuværende position. Hvis trækket er illegalt, bliver brikken sat tilbage til hvor den var før flytningen.

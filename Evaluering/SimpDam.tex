@@ -1,0 +1,6 @@
+\subsection{\textsc{SimpDam}}\label{sec:evaSimp}
+
+%   RR
+%   \item Debugging: Hvor sikkert er spillet? Hvilke sanisations har I på inputs?
+\textbf{Program sikkerhed:} Vi har indført sanitering for brikkers position, så de ikke kan trækkes udenfor brættet. Når en brik bliver sluppet over et felt, tjekkes hvorvidt flyttet er lovligt via metoderne i figur \ref{fig:tjekliste}. Når brætstørrelsen vælges (mellem 3 og 100), håndteres inputtet via \texttt{try-catch}. 
+

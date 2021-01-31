@@ -1,0 +1,94 @@
+\subsection{Overordnet}\label{sec:ImpOverordnet}
+
+% RR
+%   \item Hvilken platform har I brugt til view? (Swing, JavaFX) 
+\textbf{GUI platform:} 
+Spillet er lavet ved brug af \texttt{JavaFX} frem for \texttt{Java Swing}. Dette var en beslutning helt fra starten, da \texttt{JavaFX} forventes at erstatte \texttt{Swing} og at \texttt{JavaFX} har nemmere tilgang til event listeners. \\
+
+% RR
+%   \item Hvorfor bruger I JavaFX shapes i modellen? 
+\textbf{JavaFX Shapes:} 
+Klasserne \texttt{Piece} og \texttt{Tile} nedarver hhv. \texttt{Ellipse} og \texttt{Rectangle} fra \texttt{JavaFX Shapes}. Dermed har alle brikker og felter nem adgang til bruger input gennem event listeners. Eventuelle egenskaber som \texttt{Fill} og \texttt{Stroke} kan også bruges uden yderligere implementation. 
+\\
+
+% RR
+%    \item Hvordan håndteres FPS?
+\textbf{FPS (Frames Per Second): } 
+Spillet opdaterer kun modellen, når der er bruger-input. GUI'en udnytter \texttt{JavaFX}'s Application til at styre opdatering af billedet. Ved ikke at opdatere modellen 30-60 gange i sekundet bliver hele spillet mindre ressourcekrævende. I stedet bliver metoder kaldt af listeners fra de implementerede \texttt{JavaFX Nodes} og \texttt{Shapes}. \\
+
+% RR
+%    \item Hvor mange ressourcer kræver spillet?
+\textbf{Computer ressourcer:} 
+Som tidligere nævnt er opdateringen af modellen kun igangsat når nødvendigt, hvilket sparer mange ressourcer. Dog skal hele brættet og alle brikker initialiseres når spillet starter. Dermed er spillets ressourceforbrug klart størst når et nyt spil startes, hvorefter det bruger størstedelen af tiden i en tilstand med lavt ressourceforbrug. 
+\\
+
+% \item \item Hvorfor er alt static?
+\textbf{Static:} 
+Vi har valgt at bruge static fields og metoder, eftersom vi ikke initialiserer fx \texttt{Control} og \texttt{TopLevelControl} klasserne. Med denne brug af static bliver tilgangen til kontrol betydeligt simplere. Det gør dog grupperne af klasser i model-view-control designmønstret mindre uafhængige.
+\\
+
+% RR
+%Hvordan håndteres abstraktionsniveau i kontrollen?
+%   &
+%Hvad er TopLevelControl?
+\textbf{Abstraktionsniveauer i Kontrollen:} 
+Programmets kontrol er delt op i to klasser: \texttt{Control} og \texttt{TopLevelControl}. Klassen \texttt{Control} indeholder metoder der kigger direkte på brættet og brikkernes positioner. For at bruge \texttt{Control} mest hensigtmæssigt, blev TopLevelControl indført som mellemmand. I \texttt{TopLevelControl} findes metoder kaldes på særlige tidspunkter i løbet af en spillers tur. Ved at have denne opdeling, kan brikkerne bruge de højere abstraktionsniveauer i kontrollen uden at tage sig af hvad der sker mellem \texttt{TopLevelControl} og \texttt{Control}. 
+\\
+
+% RR
+%    \item Hvordan bruges model og view koordinater? 
+\textbf{Model og view koordinater:} 
+I spillet bruges 2 sæt koordinater: \textit{Model} koordinater og \textit{View} koordinater. Model og view koordinater er til for at styre brikkernes aktuelle placering på skærmen (view koordinater) og brikkernes (samt felternes) placering på brættet (model koordinater). Oversættelsen fra det ene koordinatsæt til det andet bruger metoderne \texttt{toModelCoord} og \texttt{toViewCoord}: 
+
+\begin{lstlisting}
+static double toViewCoord(int i) {
+	return i * tileSize + tileSize / 2; }
+
+static int toModelCoord(double d) {
+	return (int) (d / tileSize); }
+\end{lstlisting}
+
+Ved at bruge model koordinater undgås meget forvirring og datamanipulation i kontrollen. Hoveddelen af spillets logik foregår i model koordinater, som oversættes til view koordinator når brikker skal flyttes. Disse to sæt af koordinater bidrager til adskillelse mellem Model og View, i MVC designmønstret. \\
+
+
+% RR
+%    \item Hvordan navngiver I methods og variable?
+\textbf{Navngivning af fields og metoder:} 
+Vi har stilet efter bruge forklarende navne til variable. Dette har været et udfordrende element når vi løbene har redigeret kode i løbet af projektet \footnote{Eksempelvis har mange metoder fået tilføjet funktionalitet undervejs i projektet. Så skulle metodens navn opdateres!}. Hvis en metode returnerer en boolean har vi så vidt muligt også gjort metodenavnet til en udsagn som den returnerede booleanværdi svarer på om er sand eller falsk. Hvis metoder har større funktionalitet (hvis det fx er en \textit{mutator}) er et passende navn fundet med en mere dybdegående forklaring i dens deskription. \\
+
+% RR
+%Hvordan ved læseren af koden, hvordan en method virker/bruges? (comments)
+\textbf{Metode deskriptioner:} 
+Hver metode har en deskription som gør at man udefra nemt kan se hvad metoden gør samt hvilke parametre den forventer og hvilken returværdi den tilbageleverer. Et eksempel er givet ved:
+
+\begin{lstlisting}
+/**
+* Chooses a piece for the AI to move.
+*/
+\end{lstlisting}
+
+%   RR
+%   \item Hvor ens er SimpDam og AvanceretDam? 
+\textbf{Forskel på \textsc{SimpDam} og \textsc{AvaDam}:} 
+\textsc{SimpDam} var en af de tidligere versioner af spillet. \texttt{Control} klassen i \texttt{SimpDam} tager udgangspunkt i en anden fremgangsmåde end \texttt{Control} i \textsc{AvaDam}. Når en brik slippes i \textsc{SimpDam}, tjekkes om det var et legalt træk. I \textsc{AvaDam} tjekkes først alle legale træk. Når en brik slippes, tjekkes om det var én af de fundne (legale) pladser. Metoden i \textsc{SimpDam} lægger ikke op til indføre comboer. Så vi har fulgt en anden tilgang i \textsc{AvaDam}. Andre forskelle er mere åbenlyse: \textsc{AvaDam} har  menuer, visuelle indikationer, indstillinger og et sidepanel.\\
+
+% RR
+%Hvordan afholder I den "forkerte" spiller fra at trække, når det ikke er deres tur?
+%   &
+% Hvordan styres, hvis tur det er? 
+\textbf{Spillerens tur:} 
+I klassen \texttt{Control} findes et field som indeholder hvem den nuværende spiller er. Dette er implementeret ved at bruge en enumeration placeret i brikken selv: 
+
+\begin{lstlisting}
+enum Player {
+	Upper, Lower, None; }
+\end{lstlisting}
+
+Derved kan der kun ske interaktion, hvis brikken der skal flyttes har samme værdi som fieldet \texttt{currentPlayer} i klassen \texttt{Control}. Dette field skifter værdi hver gang en tur afsluttes. Ved at have en spiller type \texttt{"None"} kan spillet gøres inaktivt og dermed gøre at brikker ikke kan flyttes hvis spillet er vundet, tabt eller uafgjort. Dette medfører også at der bliver brugt minimale ressourcer hvis en spiller prøver at tage fat i modstanderens brik. 
+\\
+
+% RR
+%   \item Hvordan snappes brikker til tiles? (visuelt)
+\textbf{Når brikker slippes:} 
+Ved brug af model og view koordinater kan en brik nemt placeres i midten af det valgte felt. Dette håndhæves ved heltalsdivisionen i oversættelsen fra view til model og tilbage til view koordinater igen.  \texttt{toViewCoord} metoden forskyder samtidig positionen med halvdelen af størrelsen af felters længde, eftersom at brikker bliver placeret med hensyn til centrum. På den måde kan brikker også placeres nemt i felternes centrum uafhængig af brikkens radius.
+\\

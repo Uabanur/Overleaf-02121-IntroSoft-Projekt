@@ -1,0 +1,102 @@
+\input{Header/header.tex}
+
+%\documentclass{article}
+%\usepackage[utf8]{inputenc}
+
+\title{02121 Introduktion til Softwareteknologi \\ Projekt januar 2017: Dam}
+\author{\textbf{Gruppe 11:} \\ 
+s144063	Magnus Middelboe Søborg-Madsen \\
+s151952	Jens Carl Moesgård Eschen \\
+s154666	Mikkel Clausen Knudsen \\
+s144107	Roar Nind Steffensen}
+\date{\today}
+
+\begin{document}
+
+\setlist[enumerate]{itemsep=0mm}
+
+\maketitle
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{Figurer/Forside}
+\end{figure}
+
+\vspace{0.5 cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{Figurer/DTU3CMYK.eps}
+\end{figure}
+
+\pagenumbering{gobble}
+
+\newpage
+\input{Abstract/Abstract.tex}
+%\input{spoergsmaal.tex}
+%\input{figurer.tex}
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{AnsvarsOversigt/AnsvarsOversigt.tex}
+\input{Introduktion/Introduktion.tex}
+\input{Afgraensning/Afgraensning.tex}
+
+\section{Design}
+\input{Design/ModelViewControl.tex}
+\input{Design/Overordnet.tex}
+\input{Design/SimpDam.tex}
+\input{Design/AvaDam.tex}
+
+\section{Implementering}
+\input{Implementering/Overordnet.tex}
+
+\subsection{\textsc{SimDam}}\label{sec:ImpSimp}
+\input{Implementering/SimpDam/View.tex}
+\input{Implementering/SimpDam/Model.tex}
+\input{Implementering/SimpDam/Control.tex}
+
+\subsection{\textsc{AvaDam}}\label{sec:ImpAva}
+\input{Implementering/AvaDam/View.tex}
+\input{Implementering/AvaDam/Model.tex}
+\input{Implementering/AvaDam/Control.tex}
+\input{Implementering/AvaDam/AI.tex}
+
+\section{Evaluering}
+%\input{Evaluering/Evaluering.tex}
+\input{Evaluering/Overordnet.tex}
+\input{Evaluering/SimpDam.tex}
+\input{Evaluering/AvaDam.tex}
+
+\input{Konklusion/Konklusion.tex}
+
+\section{Gloser}
+\label{Gloser}
+\begin{itemize}
+\item \textbf{Kombinationsdrab/Combo:} I koden og rapporten refererer et kombinationsdrab (eng; combo) til et træk hvor en spiller tager én eller flere af fjendens brikker, eller til selve aktionen hvor én brik bevæger sig over og tager flere af modstanderens brikker. Læg mærke til at et enkelt \textit{kill} i koden også er en combo.
+    
+\item \textbf{Drab/Kill:} I koden og rapporten refererer et kill (dansk; drab) til et træk hvor en spiller tager én af modstanderens brikker, eller til selve aktionen hvor én brik bevæger sig over og tager en af modstanderens brikker. 
+    
+\item \textbf{Valgt brik/Selected piece:} I koden og rapporten refererer en valgt brik til den brik der er i færd med at blive trukket af musemarkøren. 
+
+\item \textbf{Field:} I rapporten refererer et field til et field i \texttt{Java}.
+
+\item \textbf{Felt:} I rapporten refererer et felt til et felt på brættet, altså et \texttt{Tile}.
+
+\item \textbf{Highlight:} I koden og rapporten refererer det at highlighte et felt til at ændre dens farve, for at markerer at det er et gyldigt træk at flytte hen til den.
+
+\end{itemize}
+
+%760,000 BADNESS
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width = 0.75\textwidth]{maaikkeslettes}
+%\caption{I'ma shit in your mouth when u sleepz}
+%\label{fig:my_label}
+%\end{figure}
+
+\end{document}
